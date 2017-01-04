@@ -1,5 +1,5 @@
-const Git = require('nodegit')
+const {Repository, Branch} = require('nodegit')
 
-Git.Repository.open('.')
-  .then(repo => repo.getCurrentBranch().then(branch => console.log('woot')))
-  .then(branch => console.log('branch', branch))
+Repository.open('.')
+  .then(repo => repo.getStatus()
+    .then(status => console.log(status)))
