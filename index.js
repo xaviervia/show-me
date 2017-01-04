@@ -51,7 +51,7 @@ const output = pwd => branch => dirty =>
           return ['🌿', value]
 
         case 'dirty':
-          return ['🐿', value ? 'yes' : 'no']
+          return [value ? '⚡️' : '✨', '']
       }
     })
     .fold(([key, value]) => [`${key}  ${value}`])
