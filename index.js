@@ -17,13 +17,17 @@ const currentBranch = () =>
   new Task((rej, res) =>
     Repository.open('.')
       .then(repo => repo.getCurrentBranch()
-        .then(branch => Branch.name(branch).then(name => res(name)))))
+        .then(branch => Branch.name(branch).then(name => res(name))))
+      .catch(() => res('-'))
+  )
 
 const isDirty = () =>
   new Task((rej, res) =>
     Repository.open('.')
       .then(repo => repo.getStatus()
-        .then(status => res(status.length > 0))))
+        .then(status => res(status.length > 0)))
+      .catch(() => res(false))
+  )
 
 const pwd = runCommand('pwd')
   .map(({stdout}) => stdout)
