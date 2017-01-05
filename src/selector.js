@@ -17,7 +17,7 @@ const selector = store =>
 
         case 'git':
           return value.isRepo
-            ? [ '🌿', `${value.currentBranch} ${value.isDirty ? ' ⚡️' + gray(value.isDirty) : ''}`]
+            ? [ '🌿', `${value.currentBranch} ${value.isDirty ? ' ⚡️ ' + gray(value.isDirty) : ''}`]
             : ['', '']
       }
     })
