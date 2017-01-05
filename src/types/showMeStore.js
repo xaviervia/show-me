@@ -3,6 +3,7 @@ const {objectLens} = require('fantasy-lenses').Lens
 const gitLens = objectLens('git')
 const currentBranchLens = gitLens.andThen(objectLens('currentBranch'))
 const isDirtyLens = gitLens.andThen(objectLens('isDirty'))
+const isRepoLens = gitLens.andThen(objectLens('isRepo'))
 
 const pathLens = objectLens('path')
 const currentHomeDir = pathLens.andThen(objectLens('currentHomeDir'))
@@ -29,7 +30,12 @@ const ShowMeStore = state => ({
 
       case 'ADD_IS_DIRTY':
         return ShowMeStore(
-          isDirtyLens.run(state).set(true)
+          isDirtyLens.run(state).set(action.payload)
+        )
+
+      case 'ADD_IS_REPO':
+        return ShowMeStore(
+          isRepoLens.run(state).set(true)
         )
 
       default:
@@ -48,7 +54,8 @@ ShowMeStore.empty = () => ShowMeStore({
   },
   git: {
     currentBranch: undefined,
-    isDirty: undefined
+    isDirty: undefined,
+    isRepo: undefined
   }
 })
 
@@ -57,8 +64,8 @@ module.exports = ShowMeStore
 if (process.argv[1] === __filename) {
   const res = ShowMeStore.empty()
     .concat(ShowMeStore({
-      type: 'ADD_IS_DIRTY',
-      payload: false
+      type: 'ADD_IS_REPO',
+      // payload: '/asdfadsf'
     }))
 
   console.log(res)

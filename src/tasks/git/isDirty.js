@@ -1,16 +1,17 @@
 const Task = require('data.task')
 const {Repository} = require('nodegit')
-const {cond, equals, T} = require('ramda')
+const {cond, complement, isNil, equals, T} = require('ramda')
 
 const isDirty = () =>
   new Task((rej, res) =>
     Repository.open('.')
       .then(repo => repo.getStatus()
-        .then(status => res(status.length > 0)))
+        .then(status => res(status.length)))
       .catch(() => res()))
     .map(cond([
-      [equals(true), () => ({
-        type: 'ADD_IS_DIRTY'
+      [complement(isNil), n => ({
+        type: 'ADD_IS_DIRTY',
+        payload: n
       })],
       [T, () => ({})]
     ]))

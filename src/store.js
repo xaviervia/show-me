@@ -3,7 +3,7 @@ const {curryN} = require('ramda')
 
 const ShowMeStore = require('./types/showMeStore')
 
-const store = curryN(4, (...x) =>
+const store = curryN(5, (...x) =>
   List(x)
     .map(ShowMeStore)
     .fold(ShowMeStore.empty()))

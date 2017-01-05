@@ -1,4 +1,4 @@
-const runCommand = require('./runCommand')
+const runCommand = require('../runCommand')
 
 const getCurrentWorkingDir = () =>
   runCommand('pwd')
