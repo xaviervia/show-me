@@ -1,5 +1,3 @@
-const {Repository, Branch} = require('nodegit')
+const runCommand = require('./src/tasks/runCommand')
 
-Repository.open('.')
-  .then(repo => repo.getStatus()
-    .then(status => console.log(status)))
+runCommand('echo $HOME').fork(console.error, console.log)

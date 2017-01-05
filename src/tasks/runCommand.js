@@ -1,9 +1,9 @@
 const Task = require('data.task')
 const {exec} = require('child_process')
 
-const runCommand = (command, args) =>
+const runCommand = (command) =>
   new Task((rej, res) =>
-    exec(command, args, (error, stdout, stderr) =>
+    exec(command, (error, stdout, stderr) =>
       error ? rej(error) : res({ stdout, stderr })))
 
 module.exports = runCommand
