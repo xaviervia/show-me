@@ -1,6 +1,6 @@
 const {gray} = require('chalk')
 const ShowMeStore = require('./types/showMeStore')
-const PairList = require('./types/pairList')
+const PairList = require('day-dream/PairList')
 
 const selector = store =>
   store
